@@ -1,0 +1,1232 @@
+{
+	"info": {
+		"_postman_id": "ab90014d-ee2d-4ba2-a0ad-94639a8f7092",
+		"name": "HabitusAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38466670"
+	},
+	"item": [
+		{
+			"name": "categorias",
+			"item": [
+				{
+					"name": "NovaCategoria",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Bem Estar\",\r\n  \"cor\": \"#fbff01\",\r\n  \"descricao\": \"Categoria para hábitos de bem estar\",\r\n  \"prioridade\": \"media\",\r\n  \"status\": \"ativa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								":id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "550e8400-e29b-41d4-a716-446655440003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"House\",\r\n    \"cor\": \"#98FB98\",\r\n    \"descricao\": \"Hábitos de organização e manutenção da casa\",\r\n    \"prioridade\": \"media\",\r\n    \"status\": \"ativa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "550e8400-e29b-41d4-a716-446655440008"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "550e8400-e29b-41d4-a716-446655440009"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[CATEGORIAS] TESTE FALHAS - Não deve deletar categoria que estiver relacionada",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/9a1e5fed-742c-4c35-b29b-3242ec0bea49",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"9a1e5fed-742c-4c35-b29b-3242ec0bea49"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[CATEGORIAS] TESTE FALHAS - Não permite outros formatos de cores sem ser hexadecima",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Bem Estar\",\r\n  \"cor\": \"255,255,255\",\r\n  \"descricao\": \"Categoria para hábitos de bem estar\",\r\n  \"prioridade\": \"media\",\r\n  \"status\": \"ativa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[CATEGORIAS] TESTE FALHAS - Nome deve ser unico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Saúde\",\r\n  \"cor\": \"#fbff01\",\r\n  \"descricao\": \"Categoria para hábitos de bem estar\",\r\n  \"prioridade\": \"media\",\r\n  \"status\": \"ativa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "objetivos",
+			"item": [
+				{
+					"name": "NovoObjetivo",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"SER O MELHOR DAS CONQUISTAS\",\r\n  \"descricao\": \"Estudar e aplicar conceitos de TypeORM em projetos com NestJS.\",\r\n  \"dataInicio\": \"2025-06-10\",\r\n  \"prazoConclusao\": \"2025-07-10\",\r\n  \"progresso\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/objectives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/objectives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/objectives/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "770e8400-e29b-41d4-a716-446655440001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Ser o melhor NestJS.\",\r\n  \"descricao\": \"Estudar e aplicar conceitos de TypeORM em projetos com NestJS.\",\r\n  \"dataInicio\": \"2025-06-10\",\r\n  \"prazoConclusao\": \"2025-07-10\",\r\n  \"progresso\": 40\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/objectives/6cab386b-ca9c-49ec-937a-b9cbc1dfb95b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives",
+								"6cab386b-ca9c-49ec-937a-b9cbc1dfb95b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/objectives/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "770e8400-e29b-41d4-a716-446655440005"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[OBJETIVOS] TESTE FALHA - Prazo anterior à data de início",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Objetivo Teste 1\",\r\n    \"descricao\": \"Descrição detalhada do objetivo para teste da regra de negócio\",\r\n    \"dataInicio\": \"2024-12-01\",\r\n    \"prazoConclusao\": \"2024-11-30\",\r\n    \"progresso\": 0\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/objectives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST http://localhost:3000/objectives \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"titulo\": \"Objetivo Teste 1\",\r\n    \"descricao\": \"Descrição detalhada do objetivo para teste da regra de negócio\",\r\n    \"dataInicio\": \"2024-12-01\",\r\n    \"prazoConclusao\": \"2024-11-30\",\r\n    \"progresso\": 0\r\n  }'"
+					},
+					"response": []
+				},
+				{
+					"name": "[OBJETIVOS] TESTE FALHA - Prazo muito distante (6 anos no futuro)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Objetivo Teste 2\",\r\n    \"descricao\": \"Descrição detalhada do objetivo para teste da regra de prazo longo\",\r\n    \"dataInicio\": \"2024-12-01\",\r\n    \"prazoConclusao\": \"2030-12-31\",\r\n    \"progresso\": 0\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/objectives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST http://localhost:3000/objectives \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"titulo\": \"Objetivo Teste 2\",\r\n    \"descricao\": \"Descrição detalhada do objetivo para teste da regra de prazo longo\",\r\n    \"dataInicio\": \"2024-12-01\",\r\n    \"prazoConclusao\": \"2030-12-31\",\r\n    \"progresso\": 0\r\n  }'"
+					},
+					"response": []
+				},
+				{
+					"name": "[OBJETIVOS] TESTE FALHA - Descrição muito curta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Objetivo Teste 4\",\r\n    \"descricao\": \"Curta\",\r\n    \"dataInicio\": \"2024-12-01\",\r\n    \"prazoConclusao\": \"2025-06-30\",\r\n    \"progresso\": 0\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/objectives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"objectives"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST http://localhost:3000/objectives \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"titulo\": \"Objetivo Teste 4\",\r\n    \"descricao\": \"Curta\",\r\n    \"dataInicio\": \"2024-12-01\",\r\n    \"prazoConclusao\": \"2025-06-30\",\r\n    \"progresso\": 0\r\n  }'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "conquistas",
+			"item": [
+				{
+					"name": "NovaConquista",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"SER O MELHOR DAS CONQUISTAS\",\r\n  \"descricao\": \"Estudar e aplicar conceitos de TypeORM em projetos com NestJS.\",\r\n  \"dataInicio\": \"2025-06-10\",\r\n  \"prazoConclusao\": \"2025-07-10\",\r\n  \"progresso\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/achievements",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/achievements",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/achievements/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "880e8400-e29b-41d4-a716-446655440005"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"Primeiro mês de economia atingido\",\r\n    \"data\": \"2024-01-31\",\r\n    \"status\": \"inativa\",\r\n    \"habitos\": [],\r\n    \"objetivos\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/achievements/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "880e8400-e29b-41d4-a716-446655440003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/achievements/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "880e8400-e29b-41d4-a716-446655440003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[CONQUISTAS] TESTE FALHA - Deletar conquista com status ativo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/achievements/880e8400-e29b-41d4-a716-446655440001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements",
+								"880e8400-e29b-41d4-a716-446655440001"
+							]
+						},
+						"description": "Generated from cURL: curl -X DELETE http://localhost:3000/achievements/{ID_DA_CONQUISTA}"
+					},
+					"response": []
+				},
+				{
+					"name": "[CONQUISTAS] TESTE FALHA - Valida se a data não é futura",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"Conquista futura\",\r\n    \"data\": \"2025-12-31T23:59:59.000Z\",\r\n    \"status\": \"ativa\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/achievements",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"achievements"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST http://localhost:3000/achievements \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"descricao\": \"Conquista futura\",\r\n    \"data\": \"2025-12-31T23:59:59.000Z\",\r\n    \"status\": \"ativa\"\r\n  }'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "habitos",
+			"item": [
+				{
+					"name": "NovoHabito",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"nome\": \"Beber água\",\r\n  \"descricao\": \"Beber pelo menos 2 litros de água por dia\",\r\n  \"frequencia\": \"diario\",\r\n  \"dataInicio\": \"2025-06-16\",\r\n  \"dataFim\": \"2025-07-16\",\r\n  \"status\": \"ativo\",\r\n  \"categoria\": {\r\n    \"id\": \"9a1e5fed-742c-4c35-b29b-3242ec0bea49\"\r\n  },\r\n  \"objetivos\": [],\r\n  \"conquistas\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/habits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"nome\": \"Beber água\",\r\n  \"descricao\": \"Beber pelo menos 2 litros de água por dia\",\r\n  \"frequencia\": \"diario\",\r\n  \"dataInicio\": \"2025-06-16\",\r\n  \"dataFim\": \"2025-07-16\",\r\n  \"status\": \"ativo\",\r\n  \"categoria\": {\r\n    \"id\": \"9a1e5fed-742c-4c35-b29b-3242ec0bea49\"\r\n  },\r\n  \"objetivos\": [],\r\n  \"conquistas\": []\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "660e8400-e29b-41d4-a716-446655440001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nome\": \"Exercitar-se\",\r\n        \"descricao\": \"Fazer 30 minutos de exercício diário\",\r\n        \"frequencia\": \"diario\",\r\n        \"dataInicio\": \"2024-01-01\",\r\n        \"dataFim\": \"2024-12-31\",\r\n        \"status\": \"concluido\",\r\n        \"conquistas\": [],\r\n        \"categoria\": {\r\n            \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\r\n            \"nome\": \"Saúde\",\r\n            \"cor\": \"#FF6B6B\",\r\n            \"descricao\": \"Hábitos relacionados à saúde física e mental\",\r\n            \"prioridade\": \"alta\",\r\n            \"status\": \"ativa\"\r\n        },\r\n        \"objetivos\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "660e8400-e29b-41d4-a716-446655440001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Beber água\",\r\n  \"descricao\": \"Beber pelo menos 2 litros de água por dia\",\r\n  \"frequencia\": \"diario\",\r\n  \"dataInicio\": \"2025-06-16\",\r\n  \"dataFim\": \"2025-07-20\",\r\n  \"status\": \"ativo\",\r\n  \"categoria\": {\r\n    \"id\": \"9a1e5fed-742c-4c35-b29b-3242ec0bea49\"\r\n  },\r\n  \"objetivos\": [\r\n  ],\r\n  \"conquistas\": [\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "660e8400-e29b-41d4-a716-446655440001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FiltrosAvançados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"nome\": \"Beber água\",\r\n  \"descricao\": \"Beber pelo menos 2 litros de água por dia\",\r\n  \"frequencia\": \"diario\",\r\n  \"dataInicio\": \"2025-06-16\",\r\n  \"dataFim\": \"2025-07-16\",\r\n  \"status\": \"ativo\",\r\n  \"categoria\": {\r\n    \"id\": \"9a1e5fed-742c-4c35-b29b-3242ec0bea49\"\r\n  },\r\n  \"objetivos\": [],\r\n  \"conquistas\": []\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "beber",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "ativo",
+									"disabled": true
+								},
+								{
+									"key": "categoriaId",
+									"value": "550e8400-e29b-41d4-a716-446655440001",
+									"disabled": true
+								},
+								{
+									"key": "orderBy",
+									"value": "nome",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[HABITOS] TESTE FALHA - Não deletar habitos ativos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/habits/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "660e8400-e29b-41d4-a716-446655440001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[HABITOS] TESTE FALHA - Validar se a data de fim é posterior à data de início",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"nome\": \"Beber água\",\r\n  \"descricao\": \"Beber pelo menos 2 litros de água por dia\",\r\n  \"frequencia\": \"diario\",\r\n  \"dataInicio\": \"2025-06-16\",\r\n  \"dataFim\": \"2025-05-16\",\r\n  \"status\": \"ativo\",\r\n  \"categoria\": {\r\n    \"id\": \"9a1e5fed-742c-4c35-b29b-3242ec0bea49\"\r\n  },\r\n  \"objetivos\": [],\r\n  \"conquistas\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[HABITOS] TESTE FALHA - Validar se não existe outro hábito com o mesmo nome na mesma categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"nome\": \"Exercitar-se\",\r\n    \"descricao\": \"Fazer 30 minutos de exercício diário\",\r\n    \"frequencia\": \"diario\",\r\n    \"dataInicio\": \"2024-01-01\",\r\n    \"dataFim\": \"2024-12-31\",\r\n    \"status\": \"ativo\",\r\n    \"categoria\": {\"id\": \"550e8400-e29b-41d4-a716-446655440001\"},\r\n    \"objetivos\": [],\r\n    \"conquistas\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/habits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"habits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

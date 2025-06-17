@@ -70,6 +70,8 @@ npm run typeorm-seed:run
 npm start
 ```
 
+## COLLECTION SALVA NA RAIZ DO PROJETO
+
 ## 📊 Estrutura do Banco de Dados
 
 O projeto possui as seguintes entidades principais:
