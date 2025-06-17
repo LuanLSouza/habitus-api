@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { HabitEntity, FrequenciaHabito, StatusType } from "./habit.entity";
-import { Repository, In } from "typeorm";
-import { HabitDtoRequest } from "./habit.dto";
+import { Repository, In, Like, Between, MoreThanOrEqual, LessThanOrEqual } from "typeorm";
+import { HabitDtoRequest, HabitFilterDto } from "./habit.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CategoryEntity } from "../category/category.entity";
 import { ObjectiveEntity } from "../objective/objective.entity";
@@ -57,6 +57,89 @@ export class HabitService {
         return await this.habitRepository.find({
             relations: ['categoria', 'objetivos', 'conquistas']
         });
+    }
+
+    async findWithFilters(filters: HabitFilterDto): Promise<{ data: HabitEntity[], total: number, page: number, limit: number }> {
+        const queryBuilder = this.habitRepository.createQueryBuilder('habit')
+            .leftJoinAndSelect('habit.categoria', 'categoria')
+            .leftJoinAndSelect('habit.objetivos', 'objetivos')
+            .leftJoinAndSelect('habit.conquistas', 'conquistas');
+
+        // Filtros de texto
+        if (filters.nome) {
+            queryBuilder.andWhere('habit.nome ILIKE :nome', { nome: `%${filters.nome}%` });
+        }
+
+        if (filters.descricao) {
+            queryBuilder.andWhere('habit.descricao ILIKE :descricao', { descricao: `%${filters.descricao}%` });
+        }
+
+        // Filtros de enum
+        if (filters.frequencia) {
+            queryBuilder.andWhere('habit.frequencia = :frequencia', { frequencia: filters.frequencia });
+        }
+
+        if (filters.status) {
+            queryBuilder.andWhere('habit.status = :status', { status: filters.status });
+        }
+
+        // Filtro por categoria
+        if (filters.categoriaId) {
+            queryBuilder.andWhere('categoria.id = :categoriaId', { categoriaId: filters.categoriaId });
+        }
+
+        // Filtros de data
+        if (filters.dataInicio) {
+            queryBuilder.andWhere('habit.dataInicio = :dataInicio', { dataInicio: filters.dataInicio });
+        }
+
+        if (filters.dataFim) {
+            queryBuilder.andWhere('habit.dataFim = :dataFim', { dataFim: filters.dataFim });
+        }
+
+        // Filtros de range de data
+        if (filters.dataInicioRange && filters.dataFimRange) {
+            queryBuilder.andWhere('habit.dataInicio BETWEEN :dataInicioRange AND :dataFimRange', {
+                dataInicioRange: filters.dataInicioRange,
+                dataFimRange: filters.dataFimRange
+            });
+        } else if (filters.dataInicioRange) {
+            queryBuilder.andWhere('habit.dataInicio >= :dataInicioRange', { dataInicioRange: filters.dataInicioRange });
+        } else if (filters.dataFimRange) {
+            queryBuilder.andWhere('habit.dataInicio <= :dataFimRange', { dataFimRange: filters.dataFimRange });
+        }
+
+        // Filtros por objetivos
+        if (filters.objetivoIds && filters.objetivoIds.length > 0) {
+            queryBuilder.andWhere('objetivos.id IN (:...objetivoIds)', { objetivoIds: filters.objetivoIds });
+        }
+
+        // Filtros por conquistas
+        if (filters.conquistaIds && filters.conquistaIds.length > 0) {
+            queryBuilder.andWhere('conquistas.id IN (:...conquistaIds)', { conquistaIds: filters.conquistaIds });
+        }
+
+        // Ordenação
+        const orderBy = filters.orderBy || 'nome';
+        const orderDirection = filters.orderDirection || 'ASC';
+        queryBuilder.orderBy(`habit.${orderBy}`, orderDirection as 'ASC' | 'DESC');
+
+        // Paginação
+        const page = filters.page || 1;
+        const limit = filters.limit || 10;
+        const offset = (page - 1) * limit;
+
+        queryBuilder.skip(offset).take(limit);
+
+        // Executar query
+        const [data, total] = await queryBuilder.getManyAndCount();
+
+        return {
+            data,
+            total,
+            page,
+            limit
+        };
     }
 
     async findById(id: string): Promise<HabitEntity> {

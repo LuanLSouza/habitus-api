@@ -1,5 +1,5 @@
 import { FrequenciaHabito, StatusType } from "./habit.entity";
-import { IsEnum, IsNotEmpty, IsOptional, IsString, IsDateString, IsUUID, ValidateNested, IsArray } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, IsDateString, IsUUID, ValidateNested, IsArray, IsNumber } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CategoryDto } from "../category/category.dto";
 import { ObjectiveDto } from "../objective/objective.dto";
@@ -53,4 +53,68 @@ export class HabitDto {
     @IsUUID()
     @IsNotEmpty({ message: 'ID do hábito é obrigatório' })
     id: string;
+}
+
+export class HabitFilterDto {
+    @IsOptional()
+    @IsString()
+    nome?: string;
+
+    @IsOptional()
+    @IsString()
+    descricao?: string;
+
+    @IsOptional()
+    @IsEnum(FrequenciaHabito)
+    frequencia?: FrequenciaHabito;
+
+    @IsOptional()
+    @IsEnum(StatusType)
+    status?: StatusType;
+
+    @IsOptional()
+    @IsUUID()
+    categoriaId?: string;
+
+    @IsOptional()
+    @IsDateString()
+    dataInicio?: Date;
+
+    @IsOptional()
+    @IsDateString()
+    dataFim?: Date;
+
+    @IsOptional()
+    @IsDateString()
+    dataInicioRange?: Date;
+
+    @IsOptional()
+    @IsDateString()
+    dataFimRange?: Date;
+
+    @IsOptional()
+    @IsArray()
+    @IsUUID(undefined, { each: true })
+    objetivoIds?: string[];
+
+    @IsOptional()
+    @IsArray()
+    @IsUUID(undefined, { each: true })
+    conquistaIds?: string[];
+
+    @IsOptional()
+    @IsString()
+    orderBy?: 'nome' | 'dataInicio' | 'status' | 'frequencia';
+
+    @IsOptional()
+    @IsString()
+    orderDirection?: 'ASC' | 'DESC';
+
+    @IsOptional()
+    @IsNumber()
+    page?: number;
+
+    @IsOptional()
+    @IsNumber()
+    limit?: number;
 } 

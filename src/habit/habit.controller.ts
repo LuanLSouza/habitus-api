@@ -1,6 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
 import { HabitService } from "./habit.service";
-import { HabitDtoRequest } from "./habit.dto";
+import { HabitDtoRequest, HabitFilterDto } from "./habit.dto";
 
 @Controller('habits')
 export class HabitController {
@@ -14,6 +14,11 @@ export class HabitController {
     @Get()
     findAll() {
         return this.habitService.findAll();
+    }
+
+    @Get('search')
+    findWithFilters(@Query() filters: HabitFilterDto) {
+        return this.habitService.findWithFilters(filters);
     }
 
     @Get(':id')
