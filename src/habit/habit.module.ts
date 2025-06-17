@@ -1,13 +1,16 @@
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { HabitEntity } from "./habit.entity";
-import { AchievementEntity } from "src/achievement/achievement.entity";
-import { CategoryEntity } from "src/category/category.entity";
-import { ObjectiveEntity } from "src/objective/objective.entity";
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { HabitEntity } from './habit.entity';
+import { HabitController } from './habit.controller';
+import { HabitService } from './habit.service';
+import { CategoryEntity } from '../category/category.entity';
+import { ObjectiveEntity } from '../objective/objective.entity';
+import { AchievementEntity } from '../achievement/achievement.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([HabitEntity, AchievementEntity, CategoryEntity, ObjectiveEntity])],
-    controllers: [],
-    providers: [],
+    imports: [TypeOrmModule.forFeature([HabitEntity, CategoryEntity, ObjectiveEntity, AchievementEntity])],
+    controllers: [HabitController],
+    providers: [HabitService],
+    exports: [HabitService],
 })
 export class HabitModule {}

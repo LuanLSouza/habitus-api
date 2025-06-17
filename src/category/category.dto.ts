@@ -1,6 +1,6 @@
 import { Status } from "src/enums/staus-enum";
 import { CategoriaPrioridade } from "./category.entity";
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CategoryDtoRequest {
   
@@ -23,4 +23,10 @@ export class CategoryDtoRequest {
     @IsEnum(Status)
     @IsOptional()
     status?: Status;
+}
+
+export class CategoryDto {
+    @IsUUID()
+    @IsNotEmpty({ message: 'ID da categoria é obrigatório' })
+    id: string;
 }
