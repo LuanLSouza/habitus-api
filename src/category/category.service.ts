@@ -55,9 +55,9 @@ export class CategoryService {
     }
 
     private async validateBusinessRules(categoryDtoRequest: CategoryDtoRequest, idToIgnore?: string) {
-        // REGRA DE NEGÓCIO 2
+        // REGRA DE NEGÓCIO 2 valida a cor esta no formato hexadecimal
         this.validateColor(categoryDtoRequest.cor);
-        // REGRA DE NEGÓCIO 3
+        // REGRA DE NEGÓCIO 3 valida se o nome da categoria é unico
         await this.validateUniqueName(categoryDtoRequest.nome, idToIgnore);
     }
 

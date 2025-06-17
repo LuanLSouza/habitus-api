@@ -99,6 +99,29 @@ export class ObjectiveService {
             throw new BadRequestException('Prazo de conclusão deve ser posterior à data de início');
         }
 
+        // REGRA DE NEGÓCIO 2: Validar se o prazo de conclusão não é mais de 5 anos no futuro
+        const cincoAnosNoFuturo = new Date();
+        cincoAnosNoFuturo.setFullYear(cincoAnosNoFuturo.getFullYear() + 5);
+        
+        if (new Date(objectiveDtoRequest.prazoConclusao) > cincoAnosNoFuturo) {
+            throw new BadRequestException('Prazo de conclusão não pode ser mais de 5 anos no futuro');
+        }
+
+        // REGRA DE NEGÓCIO 3: Validar se não há objetivos duplicados com o mesmo título (exceto o próprio)
+        const existingObjective = await this.objectiveRepository.findOne({
+            where: { titulo: objectiveDtoRequest.titulo }
+        });
+        
+        // REGRA DE NEGÓCIO 4: Validar se não há objetivos duplicados com o mesmo título (exceto o próprio)
+        if (existingObjective && existingObjective.id !== idToIgnore) {
+            throw new BadRequestException('Já existe um objetivo com este título');
+        }
+
+
+        // REGRA DE NEGÓCIO 5: Validar se não há mais de 10 hábitos associados ao objetivo
+        if (objectiveDtoRequest.habitos && objectiveDtoRequest.habitos.length > 10) {
+            throw new BadRequestException('Um objetivo não pode ter mais de 10 hábitos associados');
+        }
     }
 
 } 

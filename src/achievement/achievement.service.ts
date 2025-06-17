@@ -107,23 +107,7 @@ export class AchievementService {
             throw new BadRequestException('Data da conquista não pode ser futura');
         }
 
-        // REGRA DE NEGÓCIO 3: Validar se não existe outra conquista com a mesma descrição na mesma data
-        await this.validateUniqueDescriptionOnDate(achievementDtoRequest.descricao, achievementDtoRequest.data, idToIgnore);
     }
 
-    private async validateUniqueDescriptionOnDate(descricao: string, data: Date, idToIgnore?: string) {
-        const queryBuilder = this.achievementRepository.createQueryBuilder('achievement')
-            .where('achievement.descricao = :descricao', { descricao })
-            .andWhere('achievement.data = :data', { data: new Date(data) });
-        
-        if (idToIgnore) {
-            queryBuilder.andWhere('achievement.id != :idToIgnore', { idToIgnore });
-        }
-        
-        const existing = await queryBuilder.getOne();
-        
-        if (existing) {
-            throw new BadRequestException('Já existe uma conquista com esta descrição na mesma data.');
-        }
-    }
+
 } 

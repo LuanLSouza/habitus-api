@@ -1,98 +1,185 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Habitus API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Uma API RESTful desenvolvida em NestJS para gerenciamento de hábitos, objetivos e conquistas.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Tecnologias Utilizadas
 
-## Description
+- **NestJS** - Framework Node.js para construção de aplicações escaláveis
+- **TypeORM** - ORM para TypeScript/JavaScript
+- **PostgreSQL** - Banco de dados relacional
+- **Class Validator** - Validação de dados
+- **Jest** - Framework de testes
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📋 Pré-requisitos
 
-## Project setup
+- Node.js (versão 18 ou superior)
+- PostgreSQL (versão 12 ou superior)
+- npm ou yarn
 
+## 🛠️ Configuração do Ambiente
+
+
+### 1. Instale as dependências
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+### 2. Configure o banco de dados PostgreSQL
 
-```bash
-# development
-$ npm run start
+Crie um banco de dados chamado `habitus` no PostgreSQL:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sql
+CREATE DATABASE habitus;
 ```
 
-## Run tests
+### 3. Configuração do banco
 
-```bash
-# unit tests
-$ npm run test
+Crie um arquivo `data-source.ts` em uma pasta DB na raiz do projeto
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```env
+  type: 'postgres',
+  database: 'habitus',
+  username: 'postgres',
+  password: 'postgres',
+  port: 5432,
+  entities: ['dist/**/*.entity.js'],
+  migrations: ['dist/db/migrations/*.js'],
 ```
 
-## Deployment
+## 🗄️ Executando Migrations
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### 1. Compile o projeto
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run build
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Execute as migrations
+```bash
+npm run typeorm:run
+```
 
-## Resources
+### 3. Execute os seeds (dados iniciais)
+```bash
+npm run typeorm-seed:run
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🚀 Executando o Projeto
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Modo de desenvolvimento
+```bash
+npm start
+```
 
-## Support
+## 📊 Estrutura do Banco de Dados
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+O projeto possui as seguintes entidades principais:
 
-## Stay in touch
+- **Category** - Categorias para organizar hábitos
+- **Habit** - Hábitos do usuário
+- **Objective** - Objetivos relacionados aos hábitos
+- **Achievement** - Conquistas alcançadas
+- **Relations** - Relacionamentos entre entidades
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🔍 Funcionalidades Especiais
 
-## License
+### 1. Pesquisa Avançada em Hábitos
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+O sistema implementa uma pesquisa avançada com múltiplos filtros usando **QueryBuilder** do TypeORM:
+
+#### Endpoint de Pesquisa
+```
+GET /habits/search
+```
+
+#### Filtros Disponíveis
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `nome` | string | Busca por nome (ILIKE) |
+| `descricao` | string | Busca por descrição (ILIKE) |
+| `frequencia` | enum | Filtro por frequência (DAILY, WEEKLY, MONTHLY) |
+| `status` | enum | Filtro por status (ACTIVE, PAUSED, COMPLETED) |
+| `categoriaId` | UUID | Filtro por categoria |
+| `dataInicio` | Date | Filtro por data de início exata |
+| `dataFim` | Date | Filtro por data de fim exata |
+| `dataInicioRange` | Date | Filtro por range de data de início |
+| `dataFimRange` | Date | Filtro por range de data de fim |
+| `objetivoIds` | UUID[] | Filtro por objetivos específicos |
+| `conquistaIds` | UUID[] | Filtro por conquistas específicas |
+| `orderBy` | string | Campo para ordenação |
+| `orderDirection` | string | Direção da ordenação (ASC/DESC) |
+| `page` | number | Número da página |
+| `limit` | number | Limite de itens por página |
+
+#### Exemplo de Uso
+
+```bash
+# Buscar hábitos ativos da categoria "Saúde"
+GET /habits/search?status=ACTIVE&categoriaId=123e4567-e89b-12d3-a456-426614174000
+
+# Buscar hábitos com nome contendo "exercício"
+GET /habits/search?nome=exercício
+
+# Buscar hábitos com paginação
+GET /habits/search?page=1&limit=10&orderBy=nome&orderDirection=ASC
+
+# Buscar hábitos por range de data
+GET /habits/search?dataInicioRange=2024-01-01&dataFimRange=2024-12-31
+```
+
+### 2. Uso Avançado do QueryBuilder
+
+O sistema utiliza o **QueryBuilder** do TypeORM para construir queries complexas e otimizadas:
+
+#### Características do QueryBuilder Implementado:
+
+1. **Joins Otimizados**
+   ```typescript
+   const queryBuilder = this.habitRepository.createQueryBuilder('habit')
+       .leftJoinAndSelect('habit.categoria', 'categoria')
+       .leftJoinAndSelect('habit.objetivos', 'objetivos')
+       .leftJoinAndSelect('habit.conquistas', 'conquistas');
+   ```
+
+2. **Filtros Dinâmicos**
+   ```typescript
+   if (filters.nome) {
+       queryBuilder.andWhere('habit.nome ILIKE :nome', { nome: `%${filters.nome}%` });
+   }
+   ```
+
+3. **Filtros de Array**
+   ```typescript
+   if (filters.objetivoIds && filters.objetivoIds.length > 0) {
+       queryBuilder.andWhere('objetivos.id IN (:...objetivoIds)', { objetivoIds: filters.objetivoIds });
+   }
+   ```
+
+4. **Ordenação Dinâmica**
+   ```typescript
+   const orderBy = filters.orderBy || 'nome';
+   const orderDirection = filters.orderDirection || 'ASC';
+   queryBuilder.orderBy(`habit.${orderBy}`, orderDirection as 'ASC' | 'DESC');
+   ```
+
+5. **Paginação**
+   ```typescript
+   const page = filters.page || 1;
+   const limit = filters.limit || 10;
+   const offset = (page - 1) * limit;
+   queryBuilder.skip(offset).take(limit);
+   ```
+
+
+## 📚 Documentação da API
+
+### Endpoints Principais
+
+- `GET /habits` - Lista todos os hábitos
+- `GET /habits/search` - Pesquisa avançada de hábitos
+- `GET /habits/:id` - Busca hábito por ID
+- `POST /habits` - Cria novo hábito
+- `PUT /habits/:id` - Atualiza hábito
+- `DELETE /habits/:id` - Remove hábito
+
+Desenvolvido por Luan Limas de Souza e Ana Júlia Espindula Geremias
