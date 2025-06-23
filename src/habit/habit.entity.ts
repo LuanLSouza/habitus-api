@@ -53,7 +53,7 @@ export class HabitEntity {
   })
   status: StatusType;
 
-  @ManyToMany(() => AchievementEntity, achievement => achievement.habitos)
+  @ManyToMany(() => AchievementEntity, achievement => achievement.habitos, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'habit_achievement', 
     joinColumn: { name: 'habit_id', referencedColumnName: 'id' },

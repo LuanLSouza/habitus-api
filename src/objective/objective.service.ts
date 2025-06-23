@@ -95,7 +95,7 @@ export class ObjectiveService {
 
     private async validateBusinessRules(objectiveDtoRequest: ObjectiveDtoRequest, idToIgnore?: string) {
         // REGRA DE NEGÓCIO 1: Validar se o prazo de conclusão é posterior à data de início
-        if (new Date(objectiveDtoRequest.prazoConclusao) <= new Date(objectiveDtoRequest.dataInicio)) {
+        if (new Date(objectiveDtoRequest.prazoConclusao) < new Date(objectiveDtoRequest.dataInicio)) {
             throw new BadRequestException('Prazo de conclusão deve ser posterior à data de início');
         }
 
@@ -116,7 +116,6 @@ export class ObjectiveService {
         if (existingObjective && existingObjective.id !== idToIgnore) {
             throw new BadRequestException('Já existe um objetivo com este título');
         }
-
 
         // REGRA DE NEGÓCIO 5: Validar se não há mais de 10 hábitos associados ao objetivo
         if (objectiveDtoRequest.habitos && objectiveDtoRequest.habitos.length > 10) {
