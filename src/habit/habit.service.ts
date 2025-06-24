@@ -184,6 +184,10 @@ export class HabitService {
             habit.conquistas = conquistas;
         }
 
+        if (habit.status === StatusType.COMPLETED && !habit.dataFim) {
+            habit.dataFim = new Date();
+        }
+
         return await this.habitRepository.save(habit);
     }
 
